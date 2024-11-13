@@ -189,7 +189,6 @@ export default function BirthdayAnniversary(props: Props) {
 
     const fetchAnnouncements = async () => {
 
-        console.log(user?.department_code)
         await axiosInstance.get(`act_announcement/`, {
             params: {
                 pin: false,
@@ -198,7 +197,6 @@ export default function BirthdayAnniversary(props: Props) {
             }
         }).then(res => {
 
-            console.log(res.data)
             let newData = [...data]
             newData[2].data = Array.isArray(res.data) ? res?.data?.map((item, index)=> {
                 return {

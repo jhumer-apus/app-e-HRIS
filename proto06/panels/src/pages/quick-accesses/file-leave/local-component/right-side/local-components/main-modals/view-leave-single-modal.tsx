@@ -56,7 +56,7 @@ export default function ViewLEAVESingleModal(props: SingleLEAVEInterface) {
                 overflow: 'auto',
             }}
         >
-          <LEAVEModalComponent setSingleLEAVEDetailsData={setSingleLEAVEDetailsData} singleLEAVEDetailsData={singleLEAVEDetailsData} scroll={scroll} setScroll={setScroll}/>
+          <LEAVEModalComponent setSingleLEAVEOpenModal={setSingleLEAVEOpenModal} setSingleLEAVEDetailsData={setSingleLEAVEDetailsData} singleLEAVEDetailsData={singleLEAVEDetailsData} scroll={scroll} setScroll={setScroll}/>
         </ModalDialog>
       </Modal>
         )}

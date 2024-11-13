@@ -118,8 +118,6 @@ export const beautifyJSON = (jsonObj: BeautifyObject) => {
       beautifiedString += `${formattedKey} : ${value}\n`;
     }
   }
-
-  console.log(beautifiedString.trim())
   return beautifiedString.trim();
 }
 
@@ -150,6 +148,8 @@ export const checkDevice = () => {
     }
   )
 }
+
+export const getLast3Char = (string: string) => string.slice(-3)
 
 
 type SetState<T> = React.Dispatch<React.SetStateAction<T>>;

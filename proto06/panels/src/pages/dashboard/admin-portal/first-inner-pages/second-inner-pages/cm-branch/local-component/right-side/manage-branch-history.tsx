@@ -9,9 +9,6 @@ import { BRANCHViewInterface } from '@/types/types-pages';
 import { BRANCHViewAction } from '@/store/actions/categories';
 import { globalServerErrorMsg } from '@/store/configureStore';
 
-import axios, { AxiosError, AxiosResponse } from 'axios'
-
-
 export default function ManageBRANCHPageHistory() {
   const [singleBRANCHOpenModal, setSingleBRANCHOpenModal] = useState<boolean>(false);
   const [singleBRANCHDetailsData, setSingleBRANCHDetailsData] = useState<BRANCHViewInterface>({
@@ -30,56 +27,12 @@ export default function ManageBRANCHPageHistory() {
   const { data, status, error } = BRANCHView;
   const BRANCHViewData = data as BRANCHViewInterface[];
   const curr_user = useSelector((state: RootState) => state.auth.employee_detail?.emp_no)
-  // const [address, setAddress] = useState({
-  //   province_name: null,
-  //   city_name: null
-  // })
 
   useEffect(()=> {
     if((BRANCHViewData?.length <= 0 || BRANCHViewData === null || BRANCHViewData === undefined ) && curr_user){
       dispatch(BRANCHViewAction())
     }
   }, [curr_user]);
-
-    //USE EFFECTS
-    // useEffect(() => {
-    //   fetchProvinces()
-    //   fetchProvinces()
-    // }, [])
-
-    //FUNCTIONS
-    // const fetchProvinces = async() => {
-
-    //   await axiosInstance.get(`province/${BRANCHViewData.branch_province}`).then((res:AxiosResponse) => {
-
-    //       setAddress(curr => ({
-    //         ...curr,
-    //         province_name: res.data.name,
-    //       }))
-
-    //   }).catch((err:AxiosError) => {
-
-    //       console.log(err)
-
-    //   })
-
-    // }
-
-    // const fetchCities = async() => {
-
-    //   await axiosInstance.get(`city_municipality/${BRANCHViewData.branch_city}`).then((res:AxiosResponse) => {
-    //       BRANCHView
-    //       setAddress(curr => ({
-    //         ...curr,
-    //         city_name: res.data.name,
-    //       }))
-
-    //   }).catch((err:AxiosError) => {
-
-    //       console.log(err)
-    //   })
-
-    // }
 
   return (
     <Fragment>
@@ -96,6 +49,7 @@ export default function ManageBRANCHPageHistory() {
       </div>
       <div style={{ height: '600px', width: '100%' }}>
         <DataGrid
+          className='overflow-auto'
           rows={BRANCHViewData? BRANCHViewData as BRANCHViewInterface[]:[]}
           columns={ManageBRANCHPageColumns}
           initialState={{

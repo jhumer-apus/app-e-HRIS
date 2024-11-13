@@ -35,7 +35,7 @@ export function Auth() {
 
   return (
     <div 
-      className="flex flex-col justify-around h-screen"
+      className="flex flex-col justify-around h-screen sign-in-outer-container"
       style={
         {
           backgroundImage: "url('https://images.unsplash.com/photo-1497294815431-9365093b7331?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80')",

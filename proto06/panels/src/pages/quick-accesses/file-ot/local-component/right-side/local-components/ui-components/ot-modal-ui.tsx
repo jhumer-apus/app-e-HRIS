@@ -36,7 +36,6 @@ function OVERTIMEModalUI(props: OVERTIMEModalUIInterface) {
             }))
         })
     }
-    console.log(ThisProps)
 
     return (
         <React.Fragment>

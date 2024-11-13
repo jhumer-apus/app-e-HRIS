@@ -24,6 +24,7 @@ const Grid = styled(MuiGrid)(({ theme }) => ({
   '& [role="separator"]': {
     margin: theme.spacing(0, 2),
   },
+  columnGap: '15px'
 }));
 
 export default function EMPSEMINARSPageV2() {
@@ -38,7 +39,7 @@ export default function EMPSEMINARSPageV2() {
     <Fragment>
       {/* <div style={{border: '1px solid red'}}><ExportToCsv/></div> */}
       <Grid container direction={matches ? 'column' : 'row'} spacing={2}>
-        <Grid item xs={6} className='!pl-0'>
+        <Grid item xs={5.8} className='!pl-0'>
           <Paper elevation={3} style={PaperStyle}>
             <Box sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center' }}>
               <EMPSEMINARSCreate currEmployee={currEmployee} setCurrEmployee={setCurrEmployee}/>

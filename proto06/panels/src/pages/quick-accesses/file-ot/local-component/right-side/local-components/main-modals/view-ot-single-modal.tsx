@@ -56,7 +56,7 @@ export default function ViewOVERTIMESingleModal(props: SingleOVERTIMEInterface) 
                 overflow: 'auto',
             }}
         >
-          <OVERTIMEModalComponent setSingleOVERTIMEDetailsData={setSingleOVERTIMEDetailsData} singleOVERTIMEDetailsData={singleOVERTIMEDetailsData} scroll={scroll} setScroll={setScroll}/>
+          <OVERTIMEModalComponent setSingleOVERTIMEOpenModal={setSingleOVERTIMEOpenModal} setSingleOVERTIMEDetailsData={setSingleOVERTIMEDetailsData} singleOVERTIMEDetailsData={singleOVERTIMEDetailsData} scroll={scroll} setScroll={setScroll}/>
         </ModalDialog>
       </Modal>
         )}

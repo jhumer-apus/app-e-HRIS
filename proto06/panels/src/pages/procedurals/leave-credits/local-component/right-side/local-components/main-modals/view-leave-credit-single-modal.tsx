@@ -56,7 +56,7 @@ export default function ViewLEAVECREDITSingleModal(props: SingleLEAVECREDITInter
                 overflow: 'auto',
             }}
         >
-          <LEAVECREDITModalComponent setSingleLEAVECREDITDetailsData={setSingleLEAVECREDITDetailsData} singleLEAVECREDITDetailsData={singleLEAVECREDITDetailsData} scroll={scroll} setScroll={setScroll}/>
+          <LEAVECREDITModalComponent setSingleLEAVECREDITOpenModal={setSingleLEAVECREDITOpenModal} setSingleLEAVECREDITDetailsData={setSingleLEAVECREDITDetailsData} singleLEAVECREDITDetailsData={singleLEAVECREDITDetailsData} scroll={scroll} setScroll={setScroll}/>
         </ModalDialog>
       </Modal>
         )}

@@ -137,7 +137,6 @@ export default function RoleAutoComplete(props: RoleAutoCompleteInterface) {
     // };
 
     const handleChange = (e:any, newValue:any) => {
-        console.log(newValue)
         setCreateUSER((curr:any) => ({
             ...curr,
             role: newValue?.id

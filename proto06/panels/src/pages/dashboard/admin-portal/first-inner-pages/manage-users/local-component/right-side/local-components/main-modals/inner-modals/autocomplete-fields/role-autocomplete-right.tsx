@@ -45,7 +45,6 @@ export default function RoleAutoCompleteRight(props: RoleAutoCompleteInterface) 
     //     },
     // ]
     // })
-    console.log(createUSER)
 
     const roles = [
         {

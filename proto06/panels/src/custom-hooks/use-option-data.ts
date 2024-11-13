@@ -7,13 +7,22 @@ interface Option {
     label: React.ReactNode; // Use React.ReactNode for JSX elements
 }
 
+interface BranchOption extends Option { 
+    start: string
+}
+
+interface BranchAPIOptions {
+    data: BranchOption[],
+    loading: boolean
+}
+
 type APIOptions  = {
     data: Option[],
     loading: boolean
 }
 
 type AutoCompleteAPIOptions = APIOptions & {
-    data: AutoCompleteType[]
+    data: AutoCompleteType[] | Option[]
 }
 
 type AutoCompleteType = {
@@ -31,7 +40,7 @@ export const useOptionData = () => {
         }
     )
 
-    const [branches, setBranches] = useState<APIOptions>(
+    const [branches, setBranches] = useState<BranchAPIOptions>(
         {
             data: [],
             loading: false,
@@ -44,6 +53,7 @@ export const useOptionData = () => {
             loading: false,
         }
     )
+
 
     const [ranks, setRanks] = useState<APIOptions>(
         {
@@ -59,7 +69,7 @@ export const useOptionData = () => {
         }
     )
 
-    const [approvers, setApprovers] = useState<AutoCompleteAPIOptions>(
+    const [approvers, setApprovers] = useState<any>(
         {
             data: [],
             loading: false,
@@ -254,7 +264,8 @@ export const useOptionData = () => {
                 const mappedBranches = Array.isArray(res.data) ? res.data.map(branch => (
                     {
                         value: branch.id,
-                        label: branch.branch_name
+                        label: branch.name,
+                        start: branch.start
                     }
                 )) : []
 
@@ -290,7 +301,7 @@ export const useOptionData = () => {
                 const mappedDepartments = Array.isArray(res.data) ? res.data.map(dept => (
                     {
                         value: dept.id,
-                        label: dept.dept_name
+                        label: dept.name
                     }
                 )) : []
 
@@ -366,7 +377,7 @@ export const useOptionData = () => {
                     }
                 )) : []
 
-                setEmploymentStatus(curr => (
+                setEmploymentStatus((curr:any) => (
                     {
                         data: mappedStatus ,
                         loading: false
@@ -386,7 +397,7 @@ export const useOptionData = () => {
 
     const fetchApprovers = async () => {
 
-        setApprovers(curr => (
+        setApprovers((curr:any) => (
             {
                 data: [],
                 loading: true
@@ -398,11 +409,12 @@ export const useOptionData = () => {
                 const mappedApprovers = Array.isArray(res.data) ? res.data.map(approver=> (
                     {
                         id: approver.emp_no,
+                        // emp_no: approver.emp_no,
                         name: approver.full_name
                     }
                 )) : []
 
-                setApprovers(curr => (
+                setApprovers((curr:any) => (
                     {
                         data: mappedApprovers,
                         loading: false
@@ -411,7 +423,7 @@ export const useOptionData = () => {
             })
             .catch(err => {
                 console.error(err)
-                setApprovers(curr => (
+                setApprovers((curr:any) => (
                     {
                         data: [],
                         loading: false

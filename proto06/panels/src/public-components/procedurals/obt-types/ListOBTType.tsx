@@ -78,7 +78,7 @@ export default function ListOBTType(props: Props) {
                 ];
             
             },
-          },
+        },
     ];
 
     const closeModal = () => {

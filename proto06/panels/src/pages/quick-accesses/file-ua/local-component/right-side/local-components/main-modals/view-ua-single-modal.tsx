@@ -56,7 +56,7 @@ export default function ViewUASingleModal(props: SingleUAInterface) {
                 overflow: 'auto',
             }}
         >
-          <UAModalComponent setSingleUADetailsData={setSingleUADetailsData} singleUADetailsData={singleUADetailsData} scroll={scroll} setScroll={setScroll}/>
+          <UAModalComponent setSingleUAOpenModal={setSingleUAOpenModal} setSingleUADetailsData={setSingleUADetailsData} singleUADetailsData={singleUADetailsData} scroll={scroll} setScroll={setScroll}/>
         </ModalDialog>
       </Modal>
         )}

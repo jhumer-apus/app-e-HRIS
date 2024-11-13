@@ -1,6 +1,7 @@
 import { EmployeeContext } from "@/context/employee/EmployeeContext";
 import { useOptionData } from "@/custom-hooks/use-option-data";
 import axiosInstance from "@/helpers/axiosConfig";
+import { getLast3Char } from "@/helpers/utils";
 import AutocompleteField from "@/public-components/forms/AutoCompleteField";
 import AutocompleteForm from "@/public-components/forms/AutoCompleteForm";
 import DatePickerField from "@/public-components/forms/DatePickerField";
@@ -8,7 +9,7 @@ import InputField from "@/public-components/forms/InputField";
 import SelectField from "@/public-components/forms/SelectField";
 import { HandleAlertAction } from "@/store/actions/components";
 import { RootState } from "@/store/configureStore";
-import { Button, FormControl, InputLabel, MenuItem, Select, Typography } from "@mui/material";
+import { Button, FormControl, InputAdornment, InputLabel, MenuItem, Select, Typography } from "@mui/material";
 import dayjs, { Dayjs } from "dayjs";
 import { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -24,6 +25,8 @@ export default function EmploymentInfo() {
 
     const [employmentInfo, setEmploymentInfo] = useState<any>(
         {
+            id: null,
+            emp_no: "",
             date_hired: null,
             date_separation: null,
             separation_type: "",
@@ -73,6 +76,8 @@ export default function EmploymentInfo() {
     const resetEmploymentInfo = () => {
         setEmploymentInfo((curr:any) => (
             {
+                id: employeeData?.id,
+                emp_no: getLast3Char(employeeData?.emp_no),
                 date_hired: employeeData?.date_hired ? dayjs(employeeData.date_hired): null,
                 date_separation: employeeData?.date_separation? dayjs(employeeData.date_separation): null,
                 separation_type: employeeData?.separation_type,
@@ -147,11 +152,16 @@ export default function EmploymentInfo() {
             formData.append(key, payload[key])
         }
 
-        updateEmploymentInfo(formData, payload?.emp_no)
+        updateEmploymentInfo(formData, payload)
     }
 
-    const updateEmploymentInfo = async (formData: FormData, emp_no: string | number) => {
-        await axiosInstance.put(`employees/${emp_no}/`, formData)
+    const updateEmploymentInfo = async (formData: FormData, payload:any) => {
+
+        const { id, emp_no } = payload
+
+        console.log(id)
+
+        await axiosInstance.put(`employees/${id}/`, formData)
             .then(res => {
                 dispatch(HandleAlertAction({
                     open:true,
@@ -159,7 +169,7 @@ export default function EmploymentInfo() {
                     message:"Update Employment Information Successfully"
                 }))
                 setIsEdit(curr => false)
-                fetchEmployeeData(emp_no)
+                fetchEmployeeData(id)
             })
             .catch(err => {
                 console.log(err)
@@ -170,6 +180,8 @@ export default function EmploymentInfo() {
                 }))
             })
     }
+
+    const initialEmployeeNumber = `${branches.data.find(branch => branch.value == employmentInfo.branch_code)?.start ?? "0"}-${employmentInfo?.department_code?? "0"}00${dayjs(employmentInfo?.date_hired)?.format("YY")??"00"}`
 
     return (
         <div>
@@ -182,6 +194,51 @@ export default function EmploymentInfo() {
                             value={employmentInfo?.date_hired? dayjs(employmentInfo?.date_hired): null}
                             onChange={(newValue: Dayjs | null) => handleDateChange("date_hired", newValue)}
                             disabled={!isEdit}
+                        />
+                        <SelectField 
+                            className="w-full md:w-[300px]"
+                            labelId="company"
+                            id="company"
+                            label="Company"
+                            name="branch_code"
+                            loading={branches.loading}
+                            inputProps={{ readOnly: false }} 
+                            options={branches.data}
+                            value={employmentInfo?.branch_code}
+                            onChange={handleValueChange}
+                            disabled={!isEdit}
+                        />
+
+                        <SelectField 
+                            className="w-full md:w-[300px]"
+                            labelId="department"
+                            id="department"
+                            label="Department"
+                            name="department_code"
+                            loading={departments.loading}
+                            inputProps={{ readOnly: false }} 
+                            options={departments.data}
+                            value={employmentInfo?.department_code}
+                            onChange={handleValueChange}
+                            disabled={!isEdit}
+                        />
+
+                        <InputField
+                            required
+                            label="Employee No:" 
+                            variant="outlined"
+                            value={employmentInfo?.emp_no || ""}
+                            startAdornment={(
+                                <InputAdornment position="start">
+                                    {initialEmployeeNumber}
+                                </InputAdornment>
+                            )}
+                            onChange={handleValueChange}
+                            inputProps={{
+                                maxLength: 3
+                            }} 
+                            name="emp_no"
+                            readOnly={!isEdit}
                         />
                         <DatePickerField 
                             label="Date Separated"
@@ -226,33 +283,6 @@ export default function EmploymentInfo() {
                             inputProps={{ readOnly: false }} 
                             options={positions.data}
                             value={employmentInfo?.position_code}
-                            onChange={handleValueChange}
-                            disabled={!isEdit}
-                        />
-
-                        <SelectField 
-                            className="w-full md:w-[300px]"
-                            labelId="branches"
-                            id="branches"
-                            label="Branches"
-                            name="branch_code"
-                            loading={branches.loading}
-                            inputProps={{ readOnly: false }} 
-                            options={branches.data}
-                            value={employmentInfo?.branch_code}
-                            onChange={handleValueChange}
-                            disabled={!isEdit}
-                        />
-                        <SelectField 
-                            className="w-full md:w-[300px]"
-                            labelId="department"
-                            id="department"
-                            label="Department"
-                            name="department_code"
-                            loading={departments.loading}
-                            inputProps={{ readOnly: false }} 
-                            options={departments.data}
-                            value={employmentInfo?.department_code}
                             onChange={handleValueChange}
                             disabled={!isEdit}
                         />

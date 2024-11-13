@@ -85,11 +85,7 @@ export default function ApprovalUAPage() {
           pageSizeOptions={[25, 50, 75, 100]}
           onRowClick={(e) => {
             setSingleUADetailsData(e.row);
-            // setSingleUAOpenModal(true);
-            dispatch(HandleModalAction({
-              name:"viewUaModal",
-              value:true
-            }))
+            setSingleUAOpenModal(true);
           }}
           disableRowSelectionOnClick 
           localeText={{ noRowsLabel: `${status === 'loading' ? `${status?.toUpperCase()}...` : status === 'failed' ?  `${globalServerErrorMsg}` : 'Data Loaded - Showing 0 Results'}` }}

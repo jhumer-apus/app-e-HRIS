@@ -1,9 +1,9 @@
 import { Dispatch, Fragment, SetStateAction, useRef } from 'react';
-import ModalClose from '@mui/joy/ModalClose';
 import Typography from '@mui/joy/Typography';
 import PAYROLLGROUPModalUI from '../../ui-components/payrollgroup-modal-ui';
 import { PAYROLLGROUPViewInterface } from '@/types/types-pages';
-
+import { IconButton } from '@mui/material';
+import { XMarkIcon } from '@heroicons/react/24/solid';
 
 interface PAYROLLGROUPModalComponentInterface {
     singlePAYROLLGROUPDetailsData: PAYROLLGROUPViewInterface,
@@ -21,7 +21,15 @@ const PAYROLLGROUPModalComponent = ((props:PAYROLLGROUPModalComponentInterface) 
 
     return (
         <Fragment>
-            <Typography variant='soft'>Payroll Group Data</Typography>
+            <div className='flex justify-between items-center bg-gray-100 px-2'>
+                <Typography>Payroll Group Data</Typography>
+                <IconButton  
+                    aria-label="close"
+                    onClick={() => setSinglePAYROLLGROUPOpenModal(false)}
+                >
+                    <XMarkIcon className="w-8 text-black"/>
+                </IconButton>
+            </div>
             {/* <ModalClose sx={{marginTop: '4px'}}/> */}
             <div ref={componentRef} id="printable-area" className='mt-4'>
                 <PAYROLLGROUPModalUI 

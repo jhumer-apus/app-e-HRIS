@@ -77,13 +77,14 @@ export default function DeactivateEMPHISTORYModal(props: DeactivateEMPHISTORYMod
             layout={'center'}
             sx={{
               ...modalArea,
-                opacity: 0,
-                transition: `opacity 300ms`,
-                ...{
-                  entering: { opacity: 1 },
-                  entered: { opacity: 1 },
-                }[state],
-                overflow: 'auto',
+              opacity: 0,
+              transition: `opacity 300ms`,
+              ...{
+                entering: { opacity: 1 },
+                entered: { opacity: 1 },
+              }[state],
+              overflow: 'auto',
+              height: 'auto',
             }}
             size='sm'
         > 

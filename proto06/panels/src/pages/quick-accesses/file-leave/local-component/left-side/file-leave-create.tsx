@@ -74,10 +74,6 @@ function QuickAccessLEAVECreate(props: CreateLEAVEModalInterface) {
     });
 
     useEffect(() => {
-        console.log(leaveType)
-    }, [leaveType])
-
-    useEffect(() => {
 
         const dateDifference = getDateDifference(createLEAVE.leave_date_from, createLEAVE.leave_date_to)
 
@@ -154,7 +150,6 @@ function QuickAccessLEAVECreate(props: CreateLEAVEModalInterface) {
         //     }
         // }
         
-        console.log(formData)
         submitNewFileLeave(formData)
         // dispatch(LEAVECreateAction(formData))
     };
@@ -171,8 +166,6 @@ function QuickAccessLEAVECreate(props: CreateLEAVEModalInterface) {
             option:null
         }))
     }
-
-    console.log(createLEAVE);
 
     const submitNewFileLeave = async (formData:FormData) => {
 

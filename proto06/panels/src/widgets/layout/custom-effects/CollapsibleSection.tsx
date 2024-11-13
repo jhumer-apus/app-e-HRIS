@@ -46,7 +46,7 @@ export const CollapsibleSection: React.FC<CollapsibleSectionProps> = ({ children
 
     checkDataLink();
     setCurrentPath(location.pathname);
-  }, [currentPath, window.location.pathname]);
+  }, [currentPath]);
 
   const collapseSection = (element: HTMLElement) => {
     const sectionHeight = element.scrollHeight;
@@ -79,8 +79,7 @@ export const CollapsibleSection: React.FC<CollapsibleSectionProps> = ({ children
     element.setAttribute("data-collapsed", "false");
   };
 
-
-const toggleCollapse = () => {
+  const toggleCollapse = () => {
     if (contentRef.current) {
       const isCollapsed = contentRef.current.getAttribute('data-collapsed') === 'true';
       if (isCollapsed) {

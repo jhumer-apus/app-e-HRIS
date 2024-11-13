@@ -30,7 +30,7 @@ const OBTModalComponent = ((props:OBTModalComponentInterface) => {
                     dispatch(HandleModalAction({
                         name: "viewObtModal",
                         value: false
-                        }))
+                        })) 
                     }
                 >
                     <XMarkIcon className="w-8 text-black"/>

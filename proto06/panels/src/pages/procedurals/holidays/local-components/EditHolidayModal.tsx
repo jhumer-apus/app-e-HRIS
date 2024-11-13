@@ -55,7 +55,6 @@ export default function EditHolidayModal(props:Props) {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: 400,
         bgcolor: 'white',
         boxShadow: 24,
         p: 4,
@@ -181,7 +180,6 @@ export default function EditHolidayModal(props:Props) {
 
     const validateHoliday = (data:any) => {
 
-        console.log(data)
         let errors:any = {}
 
         !data.holiday_date && (errors["Holiday Date"] = "Holiday Date should be required")
@@ -243,15 +241,15 @@ export default function EditHolidayModal(props:Props) {
         return null
     }
 
-
     return (
         <Modal
             open={isOpenModal}
             onClose={() => {
                 setIsOpenModal((curr:boolean) => false)
             }}
+            className="flex justify-center items-center"
         >
-            <Box sx={style} className="rounded-lg">
+            <Box className="flex items-center bg-white flex-col p-4 h-auto w-[90%] sm:w-auto rounded-lg overflow-auto editHoliday">
                 <div className="m-auto w-fit">
                     <Typography id="modal-modal-title" variant="h6" component="h2">
                         Edit Holiday
@@ -368,7 +366,7 @@ export default function EditHolidayModal(props:Props) {
                         label="Holiday Description" 
                         variant="filled" 
                     />
-                    <div className="flex md:flex-row flex-col gap-4">
+                    <div className="flex flex-row gap-4">
                         <Button onClick={() => setIsOpenModal((curr:any)=> false)}>Cancel</Button>
                         <Button type="submit">Update</Button>
                     </div>

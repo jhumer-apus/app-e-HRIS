@@ -35,8 +35,8 @@ export default function OBTtypes() {
 
     return (
         <Fragment>
-            <div className="flex flex-col md:flex-row gap-4">
-                <Paper elevation={3} className="w-full h-[600px]">
+            <div className="flex md:flex-row gap-4">
+                <Paper elevation={3} className="w-full h-full">
                     <CreateOBTType refreshOBTList={fetchObtTypes}/>
                 </Paper>
                 <Paper elevation={3} className="w-full p-8 h-[600px]">

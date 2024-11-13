@@ -15,10 +15,12 @@ const PaperStyle = {
 const Grid = styled(MuiGrid)(({ theme }) => ({
     width: '100%',
     height: "100%",
+    margin: 0,
     ...theme.typography.body2,
     '& [role="separator"]': {
       margin: theme.spacing(0, 2),
     },
+    columnGap: '15px',
 }));
 
 export default function FileOVERTIMEPage() {
@@ -27,7 +29,7 @@ export default function FileOVERTIMEPage() {
 
   return (
     <Fragment>
-        <Grid container direction={matches ? 'column' : 'row'} spacing={2} className='!m-0'>
+        <Grid container direction={matches ? 'column' : 'row'} spacing={2}>
             <Grid item xs className='!pl-0'>
                 <Paper elevation={3} style={PaperStyle}>
                     <Box sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center' }}>

@@ -16,7 +16,7 @@ export const userLoginActionSuccess = createAction(
 );
 
 // New actions
-export const fetchUserData = createAction<{emp_no: Number}>('FETCH_USER_DATA');
+export const fetchUserData = createAction<{id: number | undefined | null}>('FETCH_USER_DATA');
 export const fetchUserDataSuccess = createAction(
   'FETCH_USER_DATA_SUCCESS',
   (employee_detail: EMPLOYEESViewInterface) => ({ payload: { employee_detail } })

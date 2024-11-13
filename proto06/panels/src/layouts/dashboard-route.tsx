@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 import { ChooseDashboard } from '../pages';
-import JSXRouteWrapper from '@/routes';
+// import JSXRouteWrapper from '@/routes';
+import { compiledRoutes} from '@/routes/compiled_routes';
 import { Route, Navigate } from 'react-router-dom';
 
 
@@ -20,12 +21,22 @@ function UseDashboardRoute() {
   *  {FirstInnerRoutePath}
   * </Routes>  
   */
-  const FirstInnerRoutePath = JSXRouteWrapper().routes.map((object)=> object.layout !== "auth" && object.pages.map((value)=> value.hasSubItems && value.subItems?.map((innerValue)=> {
+
+  //  uncomment if needed 
+  // const FirstInnerRoutePath = JSXRouteWrapper().routes.map((object)=> object.layout !== "auth" && object.pages.map((value)=> value.hasSubItems && value.subItems?.map((innerValue)=> {
+  //   return (
+  //     <Route path={innerValue.path} element={ innerValue.element }></Route>
+  //   )
+  // })));
+
+  const routes = compiledRoutes();
+  
+  const FirstInnerRoutePath = routes.map((object)=> object.layout !== "auth" && object.pages.map((value)=> value.hasSubItems && value.subItems?.map((innerValue)=> {
     return (
       <Route path={innerValue.path} element={ innerValue.element }></Route>
     )
   })));
-  
+
   /**
    * @author <https://github.com/Mattttyyyy>
    * @returns 
@@ -38,7 +49,7 @@ function UseDashboardRoute() {
    *  {SecondInnerRoutePath}
    * </Routes>  
    */
-  const SecondInnerRoutePath = JSXRouteWrapper().routes.map((object)=> object.layout !== "auth" && object.pages.map((value)=> value.hasSubItems && value.subItems?.map((innerValue)=> innerValue.hasSubItems && innerValue.subItems?.map((innerGrandValue)=> {
+  const SecondInnerRoutePath = routes.map((object)=> object.layout !== "auth" && object.pages.map((value)=> value.hasSubItems && value.subItems?.map((innerValue)=> innerValue.hasSubItems && innerValue.subItems?.map((innerGrandValue)=> {
     return (
       <Route path={innerGrandValue.path} element={innerGrandValue.element}></Route>
     )
@@ -57,7 +68,7 @@ function UseDashboardRoute() {
    *  {ThirdInnerRoutePath}
    * </Routes>  
    */
-  const ThirdInnerRoutePath = JSXRouteWrapper().routes.map((object)=> object.layout !== "auth" && object.pages.map((value)=> value.hasSubItems && value.subItems?.map((innerValue)=> innerValue.hasSubItems && innerValue.subItems?.map((innerGrandValue)=> innerGrandValue.hasSubItems && innerGrandValue.subItems?.map((innerGrandValue2) => {
+  const ThirdInnerRoutePath = routes.map((object)=> object.layout !== "auth" && object.pages.map((value)=> value.hasSubItems && value.subItems?.map((innerValue)=> innerValue.hasSubItems && innerValue.subItems?.map((innerGrandValue)=> innerGrandValue.hasSubItems && innerGrandValue.subItems?.map((innerGrandValue2) => {
     return (
       <Route path={innerGrandValue2.path} element={innerGrandValue2.element}></Route>
     )

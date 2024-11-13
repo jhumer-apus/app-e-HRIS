@@ -1,7 +1,7 @@
 import { EmployeeContext } from "@/context/employee/EmployeeContext";
 import { useOptionData } from "@/custom-hooks/use-option-data";
 import axiosInstance from "@/helpers/axiosConfig";
-import { cleanTextNumber } from "@/helpers/utils";
+import { cleanTextNumber, getLast3Char } from "@/helpers/utils";
 import AutocompleteForm from "@/public-components/forms/AutoCompleteForm";
 import InputField from "@/public-components/forms/InputField";
 import { HandleAlertAction } from "@/store/actions/components";
@@ -24,6 +24,8 @@ export default function PayrollInfo() {
     const { payrollGroup, fetchPayrollGroup } = useOptionData()
     const [payrollInfo, setPayrollInfo] = useState<any>(
         {
+            id: employeeData?.id,
+            emp_no: "",
             payroll_group_code: employeeData?.payroll_group_code || "",
             accnt_no: employeeData?.accnt_no || "",
             insurance_life: employeeData?.insurance_life || "",
@@ -50,6 +52,8 @@ export default function PayrollInfo() {
     const resetPayrollInfo = () => {
         setPayrollInfo((curr:any) => (
             {
+                id: employeeData?.id,
+                emp_no: getLast3Char(employeeData?.emp_no),
                 payroll_group_code: employeeData?.payroll_group_code || "",
                 accnt_no: employeeData?.accnt_no || "",
                 insurance_life: employeeData?.insurance_life || "",
@@ -89,11 +93,12 @@ export default function PayrollInfo() {
             formData.append(key, payload[key])
         }
 
-        updatePayrollInfo(formData, payload?.emp_no)
+        updatePayrollInfo(formData, payload)
     }
 
-    const updatePayrollInfo = async (formData: FormData, emp_no:string | number) => {
-        await axiosInstance.put(`employees/${emp_no}/`, formData)
+    const updatePayrollInfo = async (formData: FormData, payload:any) => {
+        const { id, emp_no } = payload
+        await axiosInstance.put(`employees/${id}/`, formData)
             .then(res => {
                 dispatch(HandleAlertAction({
                     open:true,
@@ -101,7 +106,7 @@ export default function PayrollInfo() {
                     message:"Update Payroll Info Successfully"
                 }))
                 setIsEdit(curr => false)
-                fetchEmployeeData(emp_no)
+                fetchEmployeeData(id)
             })
             .catch(err => {
                 console.error(err)

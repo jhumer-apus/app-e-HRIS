@@ -47,7 +47,19 @@
     flex-direction: column-reverse
   }
 
-  .cardHolidayText {
+  /* For every easy card body */
+  .easyAccessCard {
+    display: flex;
+    flex-direction: column-reverse; 
+    align-items: flex-end;
+  }
+
+  /* For every easy card title and value */
+  .easyAccessCardValue {
+    width: 70%;
+  }
+
+  .cardHolidayText, .easyAccessCardTitle {
     width: 100%;
     text-align: left;
     padding-top: 10px;
@@ -57,11 +69,21 @@
     margin-bottom: 20px !important;
   }
   
-  /* still on progress */
   .holidayCalendar {
     width: inherit;
   }
 
+  .MuiDataGrid-filterForm {
+    width: inherit;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+  }
+
+  .MuiDataGrid-filterFormOperatorInput, .MuiDataGrid-filterFormColumnInput, .MuiDataGrid-filterFormValueInput {
+    width: 100% !important;
+  }
 }
 
 /* // media queries for holidays calender mobile screen / osama */
@@ -73,18 +95,28 @@
   .holidaySectionOneContainer {
     height: auto !important;
   }
-
 }
 
 /* addtion for admin portal since i cant find solution with current setup :)) */
 @media only screen and (min-width: 320px) and (max-width: 720px) {
-    .adminPortalCardsContainer {
-      display: flex !important;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
+  .adminPortalCardsContainer {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 } 
+
+/* custom media queries for Sign In component with iphone 5 SE dimensions */
+@media only screen and (min-height: 500px) and (max-height: 600px) {
+  .sign-in-outer-container {
+    height: auto;
+  }
+
+  .editHoliday {
+    height: 450px;
+  }
+}
 
 .modal-content {
   @apply bg-white fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-8 border-none outline-none max-w-[100%] overflow-auto max-h-[700px] rounded-lg;

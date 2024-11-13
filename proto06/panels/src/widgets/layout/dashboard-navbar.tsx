@@ -47,7 +47,7 @@ export function DashboardNavbar() {
 
   useEffect(()=>{
     if(employee_detail?.emp_no){
-      dispatchV2(fetchUserData({emp_no: employee_detail?.emp_no}))
+      dispatchV2(fetchUserData({id: employee_detail?.id}))
     }
   }, [])
 

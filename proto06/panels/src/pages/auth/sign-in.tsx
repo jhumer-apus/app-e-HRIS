@@ -47,7 +47,7 @@ export function SignIn() {
 
   return (
     <div 
-      className="m-auto w-full"
+      className="m-auto w-full pt-10"
       id="signin-wrapper"
     >
       {/* <img

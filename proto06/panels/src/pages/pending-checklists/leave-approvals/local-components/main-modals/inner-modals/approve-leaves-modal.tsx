@@ -172,7 +172,7 @@ export default function ApproveLEAVEModal(props: ApproveLEAVEModalInterface) {
                 <Typography>Are you sure you want to approve this LEAVE?</Typography>
               </div>
               <div className='flex justify-around'>
-                <Button disabled={isLoading} variant={'contained'} onClick={approveLEAVE}>Submit</Button>
+                <Button disabled={isLoading} variant={'contained'} onClick={() => approveLEAVE}>Submit</Button>
                 <Button disabled={isLoading} variant={'outlined'} onClick={()=>{setApproveLEAVEOpenModal(false)}}>Cancel</Button>
               </div>
             </div>

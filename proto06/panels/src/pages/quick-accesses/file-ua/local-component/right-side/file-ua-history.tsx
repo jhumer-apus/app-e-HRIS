@@ -41,7 +41,6 @@ export default function QuickAccessUAPageHistory() {
     }
   }, [curr_user]);
 
-  console.log(data, status, error, "haha?")
   return (
     <Fragment>
       <div className="my-2 flex flex-wrap justify-between items-start gap-6">

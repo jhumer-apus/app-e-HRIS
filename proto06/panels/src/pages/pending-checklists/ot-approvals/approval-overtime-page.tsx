@@ -58,7 +58,7 @@ export default function ApprovalOvertimePage() {
         <DataGrid
           rows={OVERTIMEViewData? OVERTIMEViewData as OVERTIMEViewInterface[]:[]}
           columns={ApprovalOVERTIMEPageColumns}
-          initialState={{
+        initialState={{
             pagination: {
               paginationModel: { page: 0, pageSize: 100 },
             },
@@ -66,11 +66,13 @@ export default function ApprovalOvertimePage() {
           pageSizeOptions={[25, 50, 75, 100]}
           onRowClick={(e) => {
             setSingleOVERTIMEDetailsData(e.row);
-            dispatch(HandleModalAction({
-              name: "viewOtModal",
-              value:true
-            }))
-            // setSingleOVERTIMEOpenModal(true);
+            setSingleOVERTIMEOpenModal(true);
+
+            // uncomment if dev want redux store approach on hiding modals
+            // dispatch(HandleModalAction({
+            //   name: "viewOtModal",
+            //   value:true
+            // }))
           }}
           disableRowSelectionOnClick 
           localeText={{ noRowsLabel: `${status === 'loading' ? `${status?.toUpperCase()}...` : status === 'failed' ?  `${globalServerErrorMsg}` : 'Data Loaded - Showing 0 Results'}` }}

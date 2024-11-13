@@ -87,10 +87,7 @@ export default function ApprovalLEAVEPage() {
           pageSizeOptions={[25, 50, 75, 100]}
           onRowClick={(e) => {
             setSingleLEAVEDetailsData(e.row);
-            dispatch(HandleModalAction({
-              name: "viewLeaveModal",
-              value: true
-            }))
+            setSingleLEAVEOpenModal(true);
           }}
           disableRowSelectionOnClick 
           localeText={{ noRowsLabel: `${status === 'loading' ? `${status?.toUpperCase()}...` : status === 'failed' ?  `${globalServerErrorMsg}` : 'Data Loaded - Showing 0 Results'}` }}

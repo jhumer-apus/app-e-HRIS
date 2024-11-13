@@ -8,17 +8,19 @@ import QuickAccessUACreate from './local-component/left-side/file-ua-create';
 
 const PaperStyle = {
     padding: "20px",
-    height: "700px",
+    height: "auto",
     overflow: 'auto'
 }
 
 const Grid = styled(MuiGrid)(({ theme }) => ({
     width: '100%',
     height: "100%",
+    margin: 0,
     ...theme.typography.body2,
     '& [role="separator"]': {
       margin: theme.spacing(0, 2),
     },
+    columnGap: '15px',
 }));
 
 export default function FileUAPage() {
@@ -27,10 +29,10 @@ export default function FileUAPage() {
 
   return (
     <Fragment>
-        <Grid container direction={matches ? 'column' : 'row'} spacing={2} className='!m-0'>  
+        <Grid container direction={matches ? 'column' : 'row'} spacing={2}>  
             <Grid item xs className='!pl-0'>
                 <Paper elevation={3} style={PaperStyle}>
-                    <Box sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center' }}>
+                    <Box sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center', gap: '15px'}}>
                         <QuickAccessUACreate/>
                     </Box>
                 </Paper>

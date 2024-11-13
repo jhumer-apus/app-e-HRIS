@@ -119,7 +119,7 @@ export function ChooseDashboard() {
     {
       id: "perfect_attendance",
       name: "PERFECT ATTENDANCE",
-      additional_details: "Congratulations! (No lates, absent, and leaves)"
+      additional_details: "Congratulations! (No lates, undertime, absent, and leaves)"
     },
     {
       id: "imperfect_attendance",

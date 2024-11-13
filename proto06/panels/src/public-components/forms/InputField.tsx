@@ -2,20 +2,21 @@ import { FormControl, InputLabel, OutlinedInput } from "@mui/material";
 import { Fragment } from "react";
 
 export default function InputField(props:any) {
-    const {shrink = true} = props
+    const {field, ...restProps} = props
     return (
         <Fragment>
             <FormControl 
-                className={props?.className || ""}
+                className={restProps?.className || ""}
             >
-                <InputLabel 
-                    htmlFor={props?.id || ""}
-                    shrink={shrink}
+                <InputLabel
+                    htmlFor={restProps?.id || ""}
+                    shrink={restProps.shrink}
                 >
-                    {props?.label}
+                    {restProps?.label}
                 </InputLabel>
                 <OutlinedInput
-                    {...props}
+                    {...restProps}
+                    {...field?? null}
                 />
             </FormControl>
         </Fragment>

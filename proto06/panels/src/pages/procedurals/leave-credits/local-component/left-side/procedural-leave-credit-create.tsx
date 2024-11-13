@@ -103,11 +103,11 @@ function ProceduralLEAVECREDITCreate(props: CreateLEAVECREDITModalInterface) {
     }
 
     return (
-        <React.Fragment>
+        <div>
             <Typography style={{border: '2px solid rgb(25, 118, 210)', width: '100%', textAlign: 'center', padding: '6px', background: 'rgb(245,247,248)', boxShadow: '4px 4px 10px rgb(200, 200, 222)'}} variant='plain'>Create a Leave Credit Data</Typography>
-            <Typography sx={{ textAlign: 'center'}}>After Creating a Leave for an Employee, Edit on the right and put "Max Credit"</Typography>
-            <form onSubmit={onClickSubmit} className='flex flex-col gap-6 overflow-auto relative'>
-                <div className='flex md:flex-row flex-col gap-6 pt-4'>
+            <Typography sx={{ textAlign: 'center', marginTop: 3}}>After Creating a Leave for an Employee, Edit on the right and put "Max Credit"</Typography>
+            <form onSubmit={onClickSubmit} className='flex w-full flex-col gap-6 overflow-auto relative'>
+                <div className='flex flex-col gap-6 pt-4'>
                     <div className='flex flex-col gap-6'>
                         {/* <EmployeeAutoComplete createLEAVECREDIT={createLEAVECREDIT} setCreateLEAVECREDIT={setCreateLEAVECREDIT}/> */}
                         <EmployeeListField 
@@ -121,7 +121,7 @@ function ProceduralLEAVECREDITCreate(props: CreateLEAVECREDITModalInterface) {
                             options={leaveTypesData}
                             getOptionLabel={(option:any) => `${option.name} (${option.is_paid? 'Paid': 'Unpaid'})`}
                             onChange={handleChange}
-                            sx={{ width: 300 }}
+                            sx={{ width: 'inherit' }}
                             // isOptionEqualToValue={isOptionEqualToValue}
                             renderInput={(params) => 
                                 {   
@@ -198,7 +198,7 @@ function ProceduralLEAVECREDITCreate(props: CreateLEAVECREDITModalInterface) {
                     </div>
                 </div>
             </form>
-        </React.Fragment>
+        </div>
     );
 }
 

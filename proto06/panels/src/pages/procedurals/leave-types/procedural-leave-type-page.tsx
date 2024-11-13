@@ -8,7 +8,7 @@ import ProceduralLEAVETYPECreate from './local-component/left-side/procedural-le
 
 const PaperStyle = {
     padding: "20px",
-    height: "700px",
+    height: "auto",
     overflow: 'auto'
 }
 
@@ -30,7 +30,7 @@ export default function ProceduralLEAVETYPEPage() {
         <Grid container direction={matches ? 'column' : 'row'} spacing={2}>
             <Grid item xs>
                 <Paper elevation={3} style={PaperStyle}>
-                    <Box sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center' }}>
+                    <Box sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center', gap: '15px' }}>
                         <ProceduralLEAVETYPECreate/>
                     </Box>
                 </Paper>

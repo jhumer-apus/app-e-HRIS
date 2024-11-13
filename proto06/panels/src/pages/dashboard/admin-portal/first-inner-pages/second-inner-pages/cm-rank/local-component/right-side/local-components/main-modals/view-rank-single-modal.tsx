@@ -54,6 +54,7 @@ export default function ViewRANKSingleModal(props: SingleRANKInterface) {
                   entered: { opacity: 1 },
                 }[state],
                 overflow: 'auto',
+                height: 'auto',
             }}
         >
           <RANKModalComponent 

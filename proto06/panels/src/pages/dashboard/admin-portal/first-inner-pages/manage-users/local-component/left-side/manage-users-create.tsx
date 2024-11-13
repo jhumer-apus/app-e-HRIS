@@ -44,7 +44,6 @@ function ManageUSERCreate(props: CreateUSERModalInterface) {
         
         if(createUSER.username && createUSER.password && createUSER.role && createUSER.emp_no) {
 
-            console.log(createUSER)
             dispatch(USERCreateAction(createUSER))
 
         } else {

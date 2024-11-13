@@ -746,3 +746,9 @@ export interface USERResetPasswordInterface extends Pick<USERGenericInterface, "
     repeat_new_password: string,
     is_temp: boolean
 }
+
+export interface ViolationType {
+    id?: number | null
+    name: string,
+    description: string
+}

@@ -56,7 +56,7 @@ export default function ViewCUTOFFPERIODSingleModal(props: SingleCUTOFFPERIODInt
                 overflow: 'auto',
             }}
         >
-          <CUTOFFPERIODModalComponent setSingleCUTOFFPERIODDetailsData={setSingleCUTOFFPERIODDetailsData} singleCUTOFFPERIODDetailsData={singleCUTOFFPERIODDetailsData} scroll={scroll} setScroll={setScroll}/>
+          <CUTOFFPERIODModalComponent setSingleCUTOFFPERIODOpenModal={setSingleCUTOFFPERIODOpenModal} setSingleCUTOFFPERIODDetailsData={setSingleCUTOFFPERIODDetailsData} singleCUTOFFPERIODDetailsData={singleCUTOFFPERIODDetailsData} scroll={scroll} setScroll={setScroll}/>
         </ModalDialog>
       </Modal>
         )}

@@ -101,8 +101,6 @@ function ManageBRANCHCreate(props: CreateBRANCHModalInterface) {
             added_by: curr_user,
         }
 
-        console.log(branchData)
-
         if(validateBranch(branchData)) { //If has errors
             return
         }

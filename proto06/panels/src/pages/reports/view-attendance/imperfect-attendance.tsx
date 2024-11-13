@@ -52,7 +52,6 @@ export default function ViewImperfectAttendance() {
         }).then((res:AxiosResponse) => {
             
             const data:Rows[] = Array.isArray(res.data) ? res.data.map((emp:any, index:number) => {
-                console.log(emp.employee)
                 return {
                     id: index,
                     emp_image: emp.employee.employee_image,

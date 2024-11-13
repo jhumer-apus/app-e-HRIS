@@ -38,8 +38,8 @@ import { useOptionData } from '@/custom-hooks/use-option-data';
 
 //INTERFACE
 interface DropDownData {
-  branches: any[],
-  departments: any[],
+  // branches: any[],
+  // departments: any[],
   payrollGroups: any[],
   employmentStatuses: any[],
   positions: any[],
@@ -124,7 +124,6 @@ export const UserProfile = () => {
     //   ranks:[]
     // })
 
-
     // USE EFFECTS
     useEffect(() => {
       fetchBranches()
@@ -134,7 +133,7 @@ export const UserProfile = () => {
       fetchDepartments()
       fetchRanks()
       // fetchDivision()
-      fetchUniqueEmployeeNumber()
+      // fetchUniqueEmployeeNumber()
       fetchApprovers()
     }, [])
 
@@ -285,19 +284,19 @@ export const UserProfile = () => {
     // //   })
     // // }
 
-    const fetchUniqueEmployeeNumber = async() => {
-      await axiosInstance.get(`new_emp_no`).then((res:AxiosResponse) => {
-              setEmployeeData((curr:any) => ({
-                  ...curr,
-                  emp_no: res.data.new_emp_no,
-                  bio_id: res.data.new_emp_no
-              }))
-          }
-      ).catch((err:any) => {
-          console.log(err)
-          window.alert(beautifyJSON(err))
-      })
-  }
+  //   const fetchUniqueEmployeeNumber = async() => {
+  //     await axiosInstance.get(`new_emp_no`).then((res:AxiosResponse) => {
+  //             setEmployeeData((curr:any) => ({
+  //                 ...curr,
+  //                 emp_no: res.data.new_emp_no,
+  //                 bio_id: res.data.new_emp_no
+  //             }))
+  //         }
+  //     ).catch((err:any) => {
+  //         console.log(err)
+  //         window.alert(beautifyJSON(err))
+  //     })
+  // }
 
     // const fetchApprovers = () => {
     //   axiosInstance.get(`position/`).then((response:any) => {
@@ -459,12 +458,12 @@ export const UserProfile = () => {
     // Validate image if its file
     const isFile = validateImage(employeeData.employee_image)
 
-    if(employeeData.employee_image == (null || undefined)) {
+    if(!employeeData?.employee_image) {
 
       window.alert("Profile Picture is required")
       return
 
-    }else if(!isFile) {
+    } else if(!isFile) {
 
       window.alert("Profile Picture should be image")
       return
@@ -472,7 +471,7 @@ export const UserProfile = () => {
 
     const formData = new FormData();
 
-    const finalData: EMPLOYEESViewInterface = {
+    const finalData: any = {
       // user: USERViewInterface | null
       employee_image: employeeData.employee_image,
       age: employeeData.age,
@@ -490,7 +489,7 @@ export const UserProfile = () => {
       civil_status: employeeData.civil_status ?? "",
       gender: employeeData.gender ?? "",
       address: employeeData.address ?? "",
-      mobile_phone: employeeData.mobile_phone ?? "",
+      mobile_phone: employeeData.mobile_phone ? `0${employeeData.mobile_phone}`: "",
       email_address: employeeData.email_address ?? "",
       bio_id: employeeData.bio_id ?? "",
       telephone: employeeData.telephone ?? "",
@@ -499,7 +498,7 @@ export const UserProfile = () => {
       profession: employeeData.profession ?? "",
       license_no: employeeData.license_no ?? "",
       emergency_contact_person: employeeData.emergency_contact_person ?? "",
-      emergency_contact_number: employeeData.emergency_contact_number ?? "",
+      emergency_contact_number: employeeData.emergency_contact_number ? `0${employeeData.emergency_contact_number}`: "",
       hmo: employeeData.hmo ?? "",
       other_duties_responsibilities: employeeData.other_duties_responsibilities ?? "",
       payroll_no: employeeData.payroll_no ?? "",
@@ -589,6 +588,9 @@ export const UserProfile = () => {
       });
   };
 
+  const initialEmployeeNumber = `${branches.data.find(branch => branch.value == employeeData.branch_code)?.start ?? "0"}-${employeeData?.department_code?? "0"}00${dayjs(employeeData?.date_hired)?.format("YY")??"00"}`
+
+  console.log(employeeData?.emp_no)
   //STATIC
   const appStatus = app_status?? "production"
 
@@ -816,17 +818,21 @@ export const UserProfile = () => {
 
         <div className="my-4 mb-6 flex flex-wrap xl:flex-nowrap items-center gap-6 xl:gap-4">
           <FormControl className='w-full'>
-              <InputLabel htmlFor="mobile_phone">Mobile Phone #:* (required, 09123456789)</InputLabel>
+              <InputLabel htmlFor="mobile_phone">Mobile Phone #:* (required, 9123456789)</InputLabel>
               <OutlinedInput
                 id="mobile_phone"
                 className='w-full'
                 onChange={handleChangeUserData}
                 name="mobile_phone"
                 label="Mobile Phone #:* (required, 09123456789)"
-                     
+                startAdornment={(
+                  <InputAdornment position="start">
+                      +63
+                  </InputAdornment>
+              )}
                 inputProps={{
-                  maxLength:11,
-                  minLength:11
+                  maxLength:10,
+                  minLength:10
                 }}        
               />
           </FormControl>
@@ -868,10 +874,15 @@ export const UserProfile = () => {
                 name="emergency_contact_number"
                 label="Emergency Contact #: (optional)"
                 inputProps={{
-                  maxLength:11,
-                  minLength:11,
+                  maxLength:10,
+                  minLength:10,
                   pattern: '^[0-9]+$'
                 }}
+                startAdornment={(
+                  <InputAdornment position="start">
+                      +63
+                  </InputAdornment>
+                )}
                 type='tel'                               
               />
           </FormControl>
@@ -1182,17 +1193,59 @@ export const UserProfile = () => {
               </div> 
             )} */}
               <FormControl className='w-full'>
-                <InputLabel htmlFor="emp_no">Assigned employee No:* (max 7 digits)</InputLabel>
+                  <InputLabel htmlFor="company">Company: (required)</InputLabel>
+                  <Select
+                    onChange={(e:any) => setEmployeeData((curr:any) => ({
+                      ...curr,
+                      branch_code: e.target.value
+                    }))}
+                    placeholder="Select Company"
+                    name="branch_code"
+                    variant="outlined"
+                    label="Company: (required)"
+                    required
+                  >
+                    {branches.data.map((branch:any)=> (
+                      <MenuItem value={branch?.value}>{branch?.label}</MenuItem>
+                    ))}
+                  </Select>
+              </FormControl>
+              <FormControl className='w-full'>
+                  <InputLabel htmlFor="department">Department: (required)</InputLabel>
+                  <Select
+                    onChange={(e:any) => setEmployeeData((curr:any) => ({
+                      ...curr,
+                      department_code: e.target.value
+                    }))}
+                    placeholder="Select Department"
+                    name="department_code"
+                    variant="outlined"
+                    label="Department: (required)"
+                    required
+                  >
+                    {departments.data.map((department:any)=> (
+                      <MenuItem value={department?.value}>{department?.label}</MenuItem>
+                    ))}
+                  </Select>
+              </FormControl>
+              <FormControl className='w-full'>
+                <InputLabel htmlFor="emp_no">Assigned employee No:* (max 3 digits)</InputLabel>
                 <OutlinedInput
                   id="emp_no"
                   className='w-full'
                   onChange={handleChangeUserData}
                   name="emp_no"
-                  label="Assigned Employee No:* (max 7 digits)"
-                  value={employeeData.emp_no?? ""}
+                  label="Assigned Employee No:* (max 3 digits)"
+                  startAdornment={(
+                    <InputAdornment position="start">
+                        {initialEmployeeNumber}
+                    </InputAdornment>
+                  )}
+                  // value={employeeData.emp_no?? ""}
+                  disabled={!employeeData?.branch_code || !employeeData.department_code}
                   // defaultValue={employeeData.emp_no}
                   inputProps={{
-                    maxLength: 7
+                    maxLength: 3
                   }}      
                   required
                 />
@@ -1275,6 +1328,12 @@ export const UserProfile = () => {
                   type:"number",
                   steps:"0.01"
                 }}
+                startAdornment={(
+                  <InputAdornment position="start">
+                      
+                    ₱
+                  </InputAdornment>
+                )}
                      
                 required           
               />
@@ -1294,6 +1353,12 @@ export const UserProfile = () => {
                   readOnly: true,
                   // step:"0.01"
                 }}
+                startAdornment={(
+                  <InputAdornment position="start">
+                      
+                    ₱
+                  </InputAdornment>
+                )}
                 value={monthlySalaryComputation(employeeData.emp_salary_basic ?? 0)}          
               />
             </FormControl>
@@ -1335,29 +1400,7 @@ export const UserProfile = () => {
                   }
               </Select>
             </FormControl>
-            <FormControl className='w-full'>
-
-            {/* <Autocomplete
-              // disableCloseOnSelect
-              noOptionsText={'Loading... Please Wait.'}
-              options={branches}
-              // groupBy={(option:any) => option.name}
-              getOptionLabel={(option:any) => option.name}
-              // onChange={(event, value) => setEmployeeData({ ...employeeData, branch_code: value?.id })}
-              // sx={{ width: 300 }}
-              // isOptionEqualToValue={isOptionEqualToValue}
-              renderInput={(params) => 
-                  {   
-                      return(
-                        <OutlinedInput
-                          {...params} label="Branch" 
-                        />
-                      )
-
-                  }
-
-              }
-            /> */}
+            {/* <FormControl className='w-full'>
                 <InputLabel htmlFor="branch">Branch: (required)</InputLabel>
                 <Select
                   onChange={(e:any) => setEmployeeData((curr:any) => ({
@@ -1379,8 +1422,8 @@ export const UserProfile = () => {
                     <MenuItem disabled>No branch available</MenuItem>
                   )}
                 </Select>
-            </FormControl>
-            <FormControl className='w-full'>
+            </FormControl> */}
+            {/* <FormControl className='w-full'>
               <InputLabel htmlFor="department">Department: (required)</InputLabel>
               <Select
                 onChange={(e:any) => 
@@ -1408,7 +1451,7 @@ export const UserProfile = () => {
                   <MenuItem disabled>No department available</MenuItem>
                 )}
               </Select>
-            </FormControl>
+            </FormControl> */}
             {/* <FormControl className='w-full'>
               <InputLabel htmlFor="division">Division:</InputLabel>
               <Select
@@ -1522,6 +1565,12 @@ export const UserProfile = () => {
                   step:"0.01" ,
                   type:'number'
                 }}
+
+                startAdornment={(
+                  <InputAdornment position="start">
+                    ₱
+                  </InputAdornment>
+                )}
               />
             </FormControl>
         </div>
@@ -1612,6 +1661,11 @@ export const UserProfile = () => {
               }}
               label="Insurance Life: (optional)"
               type="number"
+              startAdornment={(
+                <InputAdornment position="start">
+                  ₱
+                </InputAdornment>
+              )}
                            
             />
           </FormControl>
@@ -1630,6 +1684,11 @@ export const UserProfile = () => {
                   step:"0.01",
                   min:"0"
                 }}
+                startAdornment={(
+                  <InputAdornment position="start"> 
+                    ₱
+                  </InputAdornment>
+                )}
                               
               />
           </FormControl>

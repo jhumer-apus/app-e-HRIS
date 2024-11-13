@@ -113,7 +113,7 @@ export default function ViewDtrReports() {
       } 
       return dtr
     }) : []
-    console.log(exportDtrData)
+    // console.log(exportDtrData)
     setExportDtrData((curr:any) => exportDtrData)
 
   },[dtr])

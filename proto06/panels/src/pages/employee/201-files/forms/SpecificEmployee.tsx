@@ -366,7 +366,7 @@ export const SpecificEmployee = (props: initialState) => {
     const fetchData = async function (formData: FormData) {
         try {
             const response = await axiosInstance.put(
-              `employees/${userData?.emp_no}/`,
+              `employees/${userData?.id}/`,
               formData,
               {
                 headers: {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { LEAVEViewInterface } from '@/types/types-pages';
 import { Button } from '@mui/material';
 import dayjs from 'dayjs';
@@ -28,6 +28,7 @@ interface LEAVEModalUIInterface {
     singleLEAVEDetailsData: LEAVEViewInterface;
     multiplePayslipMode?: boolean;
     setSingleLEAVEDetailsData: React.Dispatch<React.SetStateAction<LEAVEViewInterface>>;
+    setSingleLEAVEOpenModal: Dispatch<SetStateAction<boolean>>;
 }
 
 interface LeaveType {
@@ -40,7 +41,7 @@ interface LeaveType {
 function LEAVEModalUI(props: LEAVEModalUIInterface) {
     const [ approveLEAVEOpenModal, setApproveLEAVEOpenModal ] = useState(false);
     const [ denyLEAVEOpenModal, setDenyLEAVEOpenModal ] = useState(false);
-    const { setSingleLEAVEDetailsData, singleLEAVEDetailsData } = props;
+    const { setSingleLEAVEDetailsData, singleLEAVEDetailsData, setSingleLEAVEOpenModal } = props;
     const ThisProps = props.singleLEAVEDetailsData;
     const curr_user = useSelector((state: RootState)=> state.auth.employee_detail);
     const [data, setData] = useState(
@@ -226,7 +227,7 @@ function LEAVEModalUI(props: LEAVEModalUIInterface) {
     
     return (
         <React.Fragment>
-            <ApproveLEAVEModal singleLEAVEDetailsData={singleLEAVEDetailsData} setSingleLEAVEDetailsData={setSingleLEAVEDetailsData} approveLEAVEOpenModal={approveLEAVEOpenModal} setApproveLEAVEOpenModal={setApproveLEAVEOpenModal}/>
+            <ApproveLEAVEModal setSingleLEAVEOpenModal={setSingleLEAVEOpenModal} singleLEAVEDetailsData={singleLEAVEDetailsData} setSingleLEAVEDetailsData={setSingleLEAVEDetailsData} approveLEAVEOpenModal={approveLEAVEOpenModal} setApproveLEAVEOpenModal={setApproveLEAVEOpenModal}/>
             <DenyLEAVEModal singleLEAVEDetailsData={singleLEAVEDetailsData} setSingleLEAVEDetailsData={setSingleLEAVEDetailsData} denyLEAVEOpenModal={denyLEAVEOpenModal} setDenyLEAVEOpenModal={setDenyLEAVEOpenModal}/>
             <div className='flex md:flex-row flex-col gap-10 overflow-auto relative'>
                 <div className='flex gap-6 flex-col'>

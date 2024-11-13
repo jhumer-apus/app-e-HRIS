@@ -25,6 +25,7 @@ const Grid = styled(MuiGrid)(({ theme }) => ({
     '& [role="separator"]': {
       margin: theme.spacing(0, 2),
     },
+    columnGap: '15px',
 }));
 
 export default function CreateSummaryPage() {
@@ -47,8 +48,8 @@ export default function CreateSummaryPage() {
     return (
       <Fragment>
           <form>
-          <Grid container direction={matches ? 'column' : 'row'} spacing={2} className='!gap-x-3'> 
-              <Grid item xs={5.9} className='!pl-0'>
+          <Grid container direction={matches ? 'column' : 'row'} spacing={2}> 
+              <Grid item xs={5.8} className='!pl-0'>
                   <Paper elevation={3} style={PaperStyle}>
                       <CutOffListTable selectedRows={selectedRows} setSelectedRows={setSelectedRows}/>
                   </Paper>

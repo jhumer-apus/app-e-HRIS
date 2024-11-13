@@ -58,13 +58,14 @@ export default function ViewOBTSingleModal(props: SinglePayslipInterface) {
             layout={'center'}
             sx={{
               ...paySlipArea,
-                opacity: 0,
-                transition: `opacity 300ms`,
-                ...{
-                  entering: { opacity: 1 },
-                  entered: { opacity: 1 },
-                }[state],
-                overflow: 'auto',
+              opacity: 0,
+              transition: `opacity 300ms`,
+              ...{
+                entering: { opacity: 1 },
+                entered: { opacity: 1 },
+              }[state],
+              overflow: 'auto',
+              height: 'auto',
             }}
         >
           <OBTModalComponent setSingleOBTDetailsData={setSingleOBTDetailsData} singleOBTDetailsData={singleOBTDetailsData} scroll={scroll} setScroll={setScroll}/>

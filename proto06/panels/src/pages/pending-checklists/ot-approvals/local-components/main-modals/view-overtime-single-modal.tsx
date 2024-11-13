@@ -4,10 +4,6 @@ import ModalDialog from '@mui/joy/ModalDialog';
 import { Transition } from 'react-transition-group';
 import { OVERTIMEViewInterface, ViewPayrollPayPerEmployee } from '@/types/types-pages';
 import OVERTIMEModalComponent from './inner-modals/overtime-modal-component';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/store/configureStore';
-import { HandleModalAction } from '@/store/actions/components';
-
 
 interface ViewOVERTIMESingleModalInterface {
     singleOVERTIMEOpenModal: boolean; 
@@ -20,21 +16,13 @@ export default function ViewOVERTIMESingleModal(props: ViewOVERTIMESingleModalIn
   const {singleOVERTIMEOpenModal, setSingleOVERTIMEOpenModal, setSingleOVERTIMEDetailsData, singleOVERTIMEDetailsData} = props;
   const [scroll, setScroll] = React.useState<boolean>(true);
 
-  const viewOtModal = useSelector((state:RootState) => state.component.viewOtModal);
-  const dispatch = useDispatch()
-  
   return (
     <React.Fragment>
-      <Transition in={viewOtModal} timeout={400}>
+      <Transition in={singleOVERTIMEOpenModal} timeout={400}>
       {(state: string) => (
       <Modal
         open={!['exited', 'exiting'].includes(state)}
-        onClose={() => {
-          dispatch(HandleModalAction({
-            name: "viewOtModal",
-            value: false
-          }))
-        }}
+        onClose={() => setSingleOVERTIMEOpenModal(false)}
         slotProps={{
             backdrop: {
               sx: {
@@ -66,7 +54,7 @@ export default function ViewOVERTIMESingleModal(props: ViewOVERTIMESingleModalIn
                 overflow: 'auto',
             }}
         >
-          <OVERTIMEModalComponent setSingleOVERTIMEDetailsData={setSingleOVERTIMEDetailsData} singleOVERTIMEDetailsData={singleOVERTIMEDetailsData} scroll={scroll} setScroll={setScroll}/>
+          <OVERTIMEModalComponent setSingleOVERTIMEOpenModal={setSingleOVERTIMEOpenModal} setSingleOVERTIMEDetailsData={setSingleOVERTIMEDetailsData} singleOVERTIMEDetailsData={singleOVERTIMEDetailsData} scroll={scroll} setScroll={setScroll}/>
         </ModalDialog>
       </Modal>
         )}

@@ -42,7 +42,6 @@ export default function ApproveOBTModal(props: ApproveOBTModalInterface) {
 
     await axiosInstance.put(`obt_new/${singleOBTDetailsData.id}/`, payload)
       .then(res => {
-
           dispatch(OBTViewFilterApproverAction({emp_no: state?.emp_no}))
           
           dispatch(HandleAlertAction({
@@ -184,7 +183,7 @@ export default function ApproveOBTModal(props: ApproveOBTModalInterface) {
                 <Typography>Are you sure you want to approve this OBT?</Typography>
               </div>
               <div className='flex justify-around'>
-                <Button disabled={isLoading} variant={'contained'} onClick={approveOBT}>Submit</Button>
+                <Button disabled={isLoading} variant={'contained'} onClick={()=>approveOBT}>Submit</Button>
                 <Button disabled={isLoading} variant={'outlined'} onClick={()=>{setApproveOBTOpenModal(false)}}>Cancel</Button>
               </div>
             </div>

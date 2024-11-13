@@ -27,10 +27,10 @@ export function Dashboard() {
    * Initialize Employee List for all auto complete fields (Saves Time / Memory)
    */
   useEffect(()=> {
-      if(state.employees_list?.length === 0){
+      if(state.employees_list?.length === 0){ 
           dispatch2(getEmployeesList());
       }
-  }, []);
+  }, []); 
 
   return (
     <div className="min-h-screen bg-blue-gray-50/50">

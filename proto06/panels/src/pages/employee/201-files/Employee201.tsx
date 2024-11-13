@@ -64,8 +64,8 @@ const columns: GridColDef[] = [
   // { field: 'mobile_phone', headerName: 'Mobile Number', width: 150 },
   // { field: `user`, headerName: 'Has HRIS Access', width: 150, valueGetter: (params: GridValueGetterParams) => `${params.row.user?.is_active ? 'Active' : 'No Access'}` },
   { field: 'bio_id', headerName: 'Biometrics ID', width: 150 },
-  { field: 'approver1', headerName: 'Approver 1', width: 150 },
-  { field: 'approver2', headerName: 'Approver 2', width: 150 }
+  { field: 'approver1_name', headerName: 'Approver 1', width: 150 },
+  { field: 'approver2_name', headerName: 'Approver 2', width: 150 }
 ];
 
 const style = {
@@ -243,7 +243,7 @@ export default function DataTable() {
           // checkboxSelection
           onRowClick={(e) => {
             setViewEmployee(curr => true)
-            fetchEmployeeData(e.row?.emp_no)
+            fetchEmployeeData(e.row?.id)
             setModalEntranceDelay(true)
             setSecondOptionModalEntranceDelay(true)
             // dispatchSpecificEmployeeInfo(e.row?.emp_no)

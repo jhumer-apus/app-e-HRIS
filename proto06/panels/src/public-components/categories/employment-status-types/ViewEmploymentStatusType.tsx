@@ -6,9 +6,10 @@ import { HandleModalAction } from "@/store/actions/components";
 import { APILink, RootState } from "@/store/configureStore";
 import { Typography } from "@material-tailwind/react";
 import { Button, Modal, TextField } from "@mui/material";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { IconButton } from "@mui/joy";
+import { XMarkIcon } from "@heroicons/react/24/solid";
 
 interface Props {
     selectedRow: any
@@ -81,7 +82,15 @@ export default function ViewEmploymentStatusType(props: Props) {
         >
             <div className="bg-white text-black p-4 flex items-center justify-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                 <form onSubmit={onSave} className="flex flex-col gap-4 p-4">
-                    <Typography variant="h5">Employment Status Type Details</Typography>
+                    <div className="flex justify-between items-center bg-gray-100 px-2">
+                        <Typography variant="h5">Employment Status Type Details</Typography>
+                        <IconButton  
+                            aria-label="close"
+                            onClick={handleClose}
+                        >
+                            <XMarkIcon className="w-8 text-black"/>
+                        </IconButton>
+                    </div>
                     <TextField
                         focused={isEdit}
                         name="name"

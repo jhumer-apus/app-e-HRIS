@@ -56,7 +56,7 @@ export default function ViewOBTSingleModal(props: SinglePayslipInterface) {
                 overflow: 'auto',
             }}
         >
-          <OBTModalComponent setSingleOBTDetailsData={setSingleOBTDetailsData} singleOBTDetailsData={singleOBTDetailsData} scroll={scroll} setScroll={setScroll}/>
+          <OBTModalComponent setSingleOBTOpenModal={setSingleOBTOpenModal} setSingleOBTDetailsData={setSingleOBTDetailsData} singleOBTDetailsData={singleOBTDetailsData} scroll={scroll} setScroll={setScroll}/>
         </ModalDialog>
       </Modal>
         )}

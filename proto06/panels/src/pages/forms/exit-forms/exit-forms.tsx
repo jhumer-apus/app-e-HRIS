@@ -22,10 +22,7 @@ import { APILink, RootState } from '@/store/configureStore';
 import { useSelector } from "react-redux";
 import { INTERNAL_USER_ROLE } from "@/types/types-store";
 
-
 const IconColor = 'linear-gradient(56deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,90,255,1) 100%)';
-
-
 
 export interface DivAnimate {
   [key: string]: boolean

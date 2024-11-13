@@ -5,7 +5,6 @@ import { Paper, Box, useTheme, useMediaQuery } from '@mui/material';
 import ManageBRANCHPageHistory from './local-component/right-side/manage-branch-history';
 import ManageBRANCHCreate from './local-component/left-side/manage-branch-create';
 
-
 const PaperStyle = {
     padding: "20px",
     height: "700px",

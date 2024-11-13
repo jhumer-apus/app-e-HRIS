@@ -1,9 +1,6 @@
 import { RankDataInterface, USERViewInterface } from "../types-pages";
 import { PAGIBIGViewInterface, PHILHEALTHViewInterface, SSSViewInterface, TAXViewInterface } from "../types-payroll-variables";
 
-
-
-
 export const INTERNAL_USER_ROLE = {
     Developer: 6,
     HR_Super_Admin: 5,
@@ -15,7 +12,6 @@ export const INTERNAL_USER_ROLE = {
 
 export type ObjectValues<T> = T[keyof T];
 export type Internal_User_Role = ObjectValues<typeof INTERNAL_USER_ROLE>
-
 
 // Enum is said to be dangerous and risky as it is unpredictable, please refer to this link:
 // https://www.youtube.com/watch?v=jjMbPt_H3RQ

@@ -24,6 +24,7 @@ function App() {
         <Route path="/home/*" element={ isAuthenticated ? (user?.is_temp || employee_detail?.user?.is_temp? <ChangePassword/>: <Dashboard/>) : <Auth/>}/>
         <Route path="/site/*" element={ <h1>This is the website for job posting</h1> }/>
         <Route path="*" element={<Navigate to="/" replace />} />
+        
       </Routes>
     </Fragment>
   );

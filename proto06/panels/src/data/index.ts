@@ -34,4 +34,4 @@ export const roles = [
         id: INTERNAL_USER_ROLE.Employee,
         role_name: "Employee"
     },
-  ]
+]

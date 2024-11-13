@@ -66,8 +66,7 @@ export default function EditEMPSEMINARSModal(props: EditEMPSEMINARSModalInterfac
   const nullValues = Object.values(singleEMPSEMINARSDetailsData).filter(
     value => typeof value === null
   );
-    console.log(EditEMPSEMINARSOpenModal, "h123")
-  const EditEMPSEMINARS = () => { 
+    const EditEMPSEMINARS = () => { 
 
     setEditEMPSEMINARSOpenModal(false)
 
@@ -106,8 +105,6 @@ export default function EditEMPSEMINARSModal(props: EditEMPSEMINARSModalInterfac
       });
     };
   }, [EMPSEMINARSEditState.status, singleEMPSEMINARSDetailsData]);
-
-  console.log(EMPSEMINARSEditState.status, "huh?")
 
   useEffect(()=> {
 

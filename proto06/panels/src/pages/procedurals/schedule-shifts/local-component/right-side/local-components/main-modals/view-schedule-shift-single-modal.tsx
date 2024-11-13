@@ -56,7 +56,7 @@ export default function ViewSCHEDULESHIFTSingleModal(props: SingleSCHEDULESHIFTI
                 overflow: 'auto',
             }}
         >
-          <SCHEDULESHIFTModalComponent setSingleSCHEDULESHIFTDetailsData={setSingleSCHEDULESHIFTDetailsData} singleSCHEDULESHIFTDetailsData={singleSCHEDULESHIFTDetailsData} scroll={scroll} setScroll={setScroll}/>
+          <SCHEDULESHIFTModalComponent setSingleSCHEDULESHIFTOpenModal={setSingleSCHEDULESHIFTOpenModal} setSingleSCHEDULESHIFTDetailsData={setSingleSCHEDULESHIFTDetailsData} singleSCHEDULESHIFTDetailsData={singleSCHEDULESHIFTDetailsData} scroll={scroll} setScroll={setScroll}/>
         </ModalDialog>
       </Modal>
         )}

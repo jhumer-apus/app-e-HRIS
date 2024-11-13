@@ -25,10 +25,12 @@ const PaperStyle: CSSProperties = {
 const Grid = styled(MuiGrid)(({ theme }) => ({
   width: '100%',
   height: "100%",
+  margin: 0,
   ...theme.typography.body2,
   '& [role="separator"]': {
     margin: theme.spacing(0, 2),
   },
+  columnGap: '15px',
 }));
 
 export default function HolidaysPage() {
@@ -41,8 +43,8 @@ export default function HolidaysPage() {
 
     return (
         <Fragment>
-        <Grid container direction={matches ? 'column' : 'row'} spacing={2} className='!m-0'>
-            <Grid item xs={6} className='!pl-0'>
+        <Grid container direction={matches ? 'column' : 'row'} spacing={2}>
+            <Grid item xs className='!pl-0'>
                 <Paper elevation={3} style={PaperStyle} className='holidaySectionOneContainer'>
                     <Typography variant={'h6'}>
                       HRIS Calendar of Holidays
@@ -64,7 +66,7 @@ export default function HolidaysPage() {
                     </div>
                 </Paper>
             </Grid>
-            <Grid item xs={6} className='!pl-0'>
+            <Grid item xs className='!pl-0'>
                 <Paper elevation={3} style={PaperStyle} className='pb-24'>
                     <div className='flex justify-between flex-col sm:flex-row pl-2'>
                       <Typography variant={'h6'} style={{alignItems: 'center', display: 'flex', paddingLeft: '10px'}}>List of Holidays</Typography>

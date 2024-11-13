@@ -1,6 +1,7 @@
 import { EmployeeContext } from "@/context/employee/EmployeeContext";
 import { useOptionData } from "@/custom-hooks/use-option-data";
 import axiosInstance from "@/helpers/axiosConfig";
+import { getLast3Char } from "@/helpers/utils";
 import InputField from "@/public-components/forms/InputField";
 import SelectField from "@/public-components/forms/SelectField";
 import { HandleAlertAction } from "@/store/actions/components";
@@ -82,12 +83,13 @@ export default function StaticInfo() {
 
         const payloadEmployment = {
             ...stateEmployee,
+            emp_no: getLast3Char(employeeData?.emp_no),
             added_by: currUser?.emp_no
         }
 
         const payloadUser = {
             ...stateUser,
-            emp_no: stateEmployee.emp_no,
+            emp_no: getLast3Char(employeeData?.emp_no),
             added_by: currUser?.emp_no
         }
 
@@ -99,13 +101,15 @@ export default function StaticInfo() {
         }
 
 
-        updateEmploymentInfo(formDataEmployment, payloadEmployment?.emp_no)
-        updateUserInfo(payloadUser, payloadUser?.id)
+        updateEmploymentInfo(formDataEmployment, payloadEmployment)
+        // updateUserInfo(payloadUser)
 
     }
 
-    const updateEmploymentInfo = async (formData: FormData, emp_no: string | number) => {
-        await axiosInstance.put(`employees/${emp_no}/`, formData)
+    const updateEmploymentInfo = async (formData: FormData, payload:any) => {
+
+        const { id, emp_no } = payload
+        await axiosInstance.put(`employees/${id}/`, formData)
             .then(res => {
                 dispatchRedux(HandleAlertAction({
                     open:true,
@@ -113,7 +117,7 @@ export default function StaticInfo() {
                     message:"Update Acount Details Successfully"
                 }))
                 setIsEdit(curr => false)
-                fetchEmployeeData(emp_no)
+                fetchEmployeeData(id)
             })
             .catch(err => {
                 console.error(err)
@@ -125,27 +129,29 @@ export default function StaticInfo() {
             })
     }
 
-    const updateUserInfo = async (payload:any, id: number) => {
+    // const updateUserInfo = async (payload:any) => {
+    //     console.log(employeeData)
+    //     const { id } = payload
 
-        await axiosInstance.put(`user/${id}/`, payload)
-            .then(res => {
-                dispatchRedux(HandleAlertAction({
-                    open:true,
-                    status: "success",
-                    message:"Update User Details Successfully"
-                }))
-                setIsEdit(curr => false)
-                fetchEmployeeData(payload?.emp_no)
-            })
-            .catch(err => {
-                console.error(err)
-                dispatchRedux(HandleAlertAction({
-                    open:true,
-                    status: "error",
-                    message: err?.res?.message ?? "Failed to update user details"
-                }))
-            })
-    }
+    //     await axiosInstance.put(`user/${id}/`, payload)
+    //         .then(res => {
+    //             dispatchRedux(HandleAlertAction({
+    //                 open:true,
+    //                 status: "success",
+    //                 message:"Update User Details Successfully"
+    //             }))
+    //             setIsEdit(curr => false)
+    //             fetchEmployeeData(payload?.emp_no)
+    //         })
+    //         .catch(err => {
+    //             console.error(err)
+    //             dispatchRedux(HandleAlertAction({
+    //                 open:true,
+    //                 status: "error",
+    //                 message: err?.res?.message ?? "Failed to update user details"
+    //             }))
+    //         })
+    // }
     return (
         <div className="">
             <form onSubmit={submit} className="flex flex-col gap-8">
@@ -158,6 +164,7 @@ export default function StaticInfo() {
                             value={stateEmployee?.bio_id}
                             onChange={(e:any) => handleChange(e, "EMPLOYMENT")}
                             name="bio_id"
+                            shrink
                             readOnly={!isEdit}
                         />
                         <InputField 
@@ -220,8 +227,8 @@ export default function StaticInfo() {
                             options={roles}
                             name="role"
                             value={stateUser?.role?.toString() || ""}
-                            disabled={!isEdit}
-                            onChange={(e:any) => handleChange(e, "USER")}                     
+                            disabled={true}
+                            // onChange={(e:any) => handleChange(e, "USER")}                     
                         />
                         <InputField 
                             type="email"

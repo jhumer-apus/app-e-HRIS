@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { APILink, RootState } from '@/store/configureStore';
 import { USERResetPasswordAction } from '@/store/actions/users';
 import { clearFields } from '@/helpers/utils';
-import { fetchUserData, userLogout } from "@/store/actions/auth";
+import { userLogout } from "@/store/actions/auth";
 import Cookies from 'js-cookie';
 
 //LIBRARIES

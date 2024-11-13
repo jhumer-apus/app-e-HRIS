@@ -27,6 +27,7 @@
     "axios": "^1.4.0",
     "date-fns": "^3.3.1",
     "dayjs": "^1.11.9",
+    "formik": "^2.4.6",
     "js-cookie": "^3.0.5",
     "json-server": "^0.17.4",
     "jspdf": "^2.5.1",

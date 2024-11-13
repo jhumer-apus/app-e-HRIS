@@ -100,7 +100,7 @@ export default function CreateOBTType(props:Props) {
     }
     
     return (
-        <div className="p-8 h-full">
+        <div className="p-8 h-auto">
             <Typography style={{border: '2px solid rgb(25, 118, 210)', width: '100%', textAlign: 'center', padding: '6px', background: 'rgb(245,247,248)', boxShadow: '4px 4px 10px rgb(200, 200, 222)'}} variant='plain'>Create a OBT Types</Typography>
             <form className="my-4 grid grid-cols gap-4 content-center h-full" onSubmit={createOBTType}>
                 <TextField

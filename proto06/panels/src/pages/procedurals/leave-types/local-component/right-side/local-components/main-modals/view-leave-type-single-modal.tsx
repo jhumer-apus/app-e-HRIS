@@ -56,7 +56,7 @@ export default function ViewLEAVETYPESingleModal(props: SingleLEAVETYPEInterface
                 overflow: 'auto',
             }}
         >
-          <LEAVETYPEModalComponent setSingleLEAVETYPEDetailsData={setSingleLEAVETYPEDetailsData} singleLEAVETYPEDetailsData={singleLEAVETYPEDetailsData} scroll={scroll} setScroll={setScroll}/>
+          <LEAVETYPEModalComponent setSingleLEAVETYPEOpenModal={setSingleLEAVETYPEOpenModal} setSingleLEAVETYPEDetailsData={setSingleLEAVETYPEDetailsData} singleLEAVETYPEDetailsData={singleLEAVETYPEDetailsData} scroll={scroll} setScroll={setScroll}/>
         </ModalDialog>
       </Modal>
         )}

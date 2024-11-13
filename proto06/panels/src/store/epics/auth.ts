@@ -70,8 +70,8 @@ export const authEpic: Epic = (action$, state$) =>
 );
 
 // New API call function
-const fetchUserDataApiCall = async (emp_no: Number) => {
-  const response = await axiosInstance.get(`employees/${emp_no}/`);
+const fetchUserDataApiCall = async (id: number | undefined | null) => {
+  const response = await axiosInstance.get(`employees/${id}/`);
   return response.data;
 };
 
@@ -81,7 +81,7 @@ export const fetchUserDataEpic: Epic = (action$, state$) =>
     ofType(fetchUserData.type),
     // tap(action => console log here('Received action in Epic:', action)), // Console logger
     switchMap((action: ReturnType<typeof fetchUserData>) =>
-      from(fetchUserDataApiCall(action.payload.emp_no)).pipe(
+      from(fetchUserDataApiCall(action.payload.id)).pipe(
         map((data) => {
 
           const isSecure = import.meta.env.VITE_APP_STATUS != "development"

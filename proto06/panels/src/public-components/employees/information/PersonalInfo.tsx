@@ -1,7 +1,7 @@
 import { EmployeeContext } from "@/context/employee/EmployeeContext";
 import { useOptionData } from "@/custom-hooks/use-option-data";
 import axiosInstance from "@/helpers/axiosConfig";
-import { mobileNoFormat } from "@/helpers/utils";
+import { getLast3Char, mobileNoFormat } from "@/helpers/utils";
 import { validateImage } from "@/helpers/validator/employee_information";
 import CityField from "@/public-components/forms/address/CityField";
 import ProvinceField from "@/public-components/forms/address/ProvinceField";
@@ -30,6 +30,8 @@ export default function PersonalInfo() {
     const dispatch = useDispatch()
     const [personalInfo, setPersonalInfo] = useState<any>(
         {
+            id: null,
+            emp_no: '',
             employee_image: "",
             first_name: "",
             middle_name: "",
@@ -95,6 +97,8 @@ export default function PersonalInfo() {
     const resetPersonalInfo = () => {
         setPersonalInfo((curr:any) => (
             {
+                id: employeeData?.id,
+                emp_no: getLast3Char(employeeData?.emp_no),
                 employee_image: employeeData?.employee_image || "",
                 first_name: employeeData?.first_name || "",
                 middle_name: employeeData?.middle_name || "",
@@ -295,11 +299,14 @@ export default function PersonalInfo() {
             formData.append(key, payload[key])
         }
 
-        updatePersonalInfo(formData, payload?.emp_no)
+        updatePersonalInfo(formData, payload)
     }
 
-    const updatePersonalInfo = async (formData: FormData, emp_no:string | number) => {
-        await axiosInstance.put(`employees/${emp_no}/`, formData)
+    const updatePersonalInfo = async (formData: FormData, payload:any) => {
+        const { id, emp_no } = payload
+
+        console.log(typeof id)
+        await axiosInstance.put(`employees/${id}/`, formData)
             .then(res => {
                 dispatch(HandleAlertAction({
                     open:true,
@@ -307,7 +314,7 @@ export default function PersonalInfo() {
                     message:"Update Personal Information Successfully"
                 }))
                 setIsEdit(curr => false)
-                fetchEmployeeData(emp_no)
+                fetchEmployeeData(id)
             })
             .catch(err => {
                 console.error(err)

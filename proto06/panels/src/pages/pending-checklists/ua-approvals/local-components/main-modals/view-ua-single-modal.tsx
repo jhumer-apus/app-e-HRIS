@@ -4,8 +4,6 @@ import ModalDialog from '@mui/joy/ModalDialog';
 import { Transition } from 'react-transition-group';
 import { UAViewInterface, ViewPayrollPayPerEmployee } from '@/types/types-pages';
 import UAModalComponent from './inner-modals/ua-modal-component';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/store/configureStore';
 import { HandleModalAction } from '@/store/actions/components';
 
 
@@ -19,23 +17,14 @@ interface ViewUASingleModalInterface {
 export default function ViewUASingleModal(props: ViewUASingleModalInterface) {
   const {singleUAOpenModal, setSingleUAOpenModal, setSingleUADetailsData, singleUADetailsData} = props;
   const [scroll, setScroll] = React.useState<boolean>(true);
-  const viewUaModal = useSelector((state:RootState) => state.component.viewUaModal)
-
-  const dispatch = useDispatch()
 
   return (
     <React.Fragment>
-      <Transition in={viewUaModal} timeout={400}>
+      <Transition in={singleUAOpenModal} timeout={400}>
       {(state: string) => (
       <Modal
         open={!['exited', 'exiting'].includes(state)}
-        onClose={() => {
-          // setSingleUAOpenModal(false);
-          dispatch(HandleModalAction({
-            name: "viewUaModal",
-            value: false
-          }))
-        }}
+        onClose={() => { setSingleUAOpenModal(false) }}
         slotProps={{
             backdrop: {
               sx: {
@@ -67,7 +56,7 @@ export default function ViewUASingleModal(props: ViewUASingleModalInterface) {
                 overflow: 'auto',
             }}
         >
-          <UAModalComponent setSingleUADetailsData={setSingleUADetailsData} singleUADetailsData={singleUADetailsData} scroll={scroll} setScroll={setScroll}/>
+          <UAModalComponent setSingleUAOpenModal={setSingleUAOpenModal} setSingleUADetailsData={setSingleUADetailsData} singleUADetailsData={singleUADetailsData} scroll={scroll} setScroll={setScroll}/>
         </ModalDialog>
       </Modal>
         )}

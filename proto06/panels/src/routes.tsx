@@ -124,7 +124,6 @@ import EmploymentHistoryPage from "./pages/employee/employment-history/employmen
 import AutoStoriesOutlinedIcon from '@mui/icons-material/AutoStoriesOutlined';
 import Diversity3OutlinedIcon from '@mui/icons-material/Diversity3Outlined';
 
-
 import ViewMonthlySchedule from "./pages/reports/view-monthly-schedule";
 // import ViewEmployeeLeaves from "./pages/reports/view-employee-leaves";
 import ViewEmployeeLeaves from "./pages/reports/view-employee-leaves/leaves-by-cutoff";
@@ -177,6 +176,7 @@ const JSXRouteWrapper = () => {
             path: "/Dashboards",
             element: <strong style={{height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px'}} className="text-red-500 py-1 px-3 bg-transparent hover:bg-violet-600 transition-all duration-200">YOU SHALL NOT PASS!!</strong>,
             hasSubItems: true,
+            // function 
             subItems: [
               // HIDDEN BECAUSE OF REDUNDANCY
               // {
@@ -195,6 +195,7 @@ const JSXRouteWrapper = () => {
                 element: <AdminPortal/>,
                 hasSubItems: true,
                 subItems: 
+                // function param na route
                 [
                   {
                     id: 111000,

@@ -1,9 +1,9 @@
 import { Dispatch, Fragment, SetStateAction, useRef } from 'react';
-import ModalClose from '@mui/joy/ModalClose';
 import Typography from '@mui/joy/Typography';
 import BRANCHModalUI from '../../ui-components/branch-modal-ui';
 import { BRANCHViewInterface } from '@/types/types-pages';
-
+import { IconButton } from '@mui/material';
+import { XMarkIcon } from '@heroicons/react/24/solid';
 
 interface BRANCHModalComponentInterface {
     singleBRANCHDetailsData: BRANCHViewInterface,
@@ -17,7 +17,15 @@ const BRANCHModalComponent = ((props:BRANCHModalComponentInterface) => {
 
     return (
         <Fragment>
-            <Typography variant='soft' >Branch Data</Typography>
+            <div className='flex justify-between items-center bg-gray-100 px-2'>
+                <Typography>Branch Data</Typography>
+                <IconButton  
+                    aria-label="close"
+                    onClick={() => setSingleBRANCHOpenModal(false)}
+                >
+                    <XMarkIcon className="w-8 text-black"/>
+                </IconButton>
+            </div>
             {/* <ModalClose sx={{marginTop: '4px'}}/> */}
             <div ref={componentRef} id="printable-area" className='mt-4'>
                 <BRANCHModalUI 

@@ -56,7 +56,7 @@ export default function ViewSCHEDULEDAILYSingleModal(props: SingleSCHEDULEDAILYI
                 overflow: 'auto',
             }}
         >
-          <SCHEDULEDAILYModalComponent setSingleSCHEDULEDAILYDetailsData={setSingleSCHEDULEDAILYDetailsData} singleSCHEDULEDAILYDetailsData={singleSCHEDULEDAILYDetailsData} scroll={scroll} setScroll={setScroll}/>
+          <SCHEDULEDAILYModalComponent setSingleSCHEDULEDAILYOpenModal={setSingleSCHEDULEDAILYOpenModal} setSingleSCHEDULEDAILYDetailsData={setSingleSCHEDULEDAILYDetailsData} singleSCHEDULEDAILYDetailsData={singleSCHEDULEDAILYDetailsData} scroll={scroll} setScroll={setScroll}/>
         </ModalDialog>
       </Modal>
         )}

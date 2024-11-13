@@ -19,7 +19,6 @@ export interface IRoute {
     pages: Array<IPage>;
 }
 
-
 export enum ScheduleDailyColor {
     _restday = 'linear-gradient(0deg, rgba(34,195,193,0.2) 0%, rgba(38,199,133,0.2) 50%)',
     _workday = 'linear-gradient(0deg, rgba(195,147,34,0.2) 0%, rgba(253,187,45,0.2) 100%)',

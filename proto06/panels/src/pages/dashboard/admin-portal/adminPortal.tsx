@@ -39,7 +39,7 @@ export function AdminPortal() {
             transform: !isVisible[`${value}${index}`] ? 'translateY(0)' : 'translateY(-100%)',
             opacity: !isVisible[`${value}${index}`] ? 1 : 0,
           }} data-type={index} className=" xs:w-[80%] sm:!w-[90%] xl:!w-full">
-            <EasyAccessCard
+            <EasyAccessCard 
               value={value}
               onClickHandler={handleOnClick}
               onClickDetails={`${value}${index}`}
