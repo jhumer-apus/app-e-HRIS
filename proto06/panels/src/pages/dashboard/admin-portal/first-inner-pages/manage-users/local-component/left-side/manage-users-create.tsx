@@ -28,21 +28,22 @@ function ManageUSERCreate(props: CreateUSERModalInterface) {
 
     const dispatch = useDispatch();
     const [isOpenPasswordGenerator, setIsOpenPasswordGenerator] = useState<boolean>(false);
-    const curr_user = useSelector((state: RootState)=> state.auth.employee_detail?.emp_no);
+    const curr_user = useSelector((state: RootState)=> state.auth.employee_detail);
     const USERCreatestate = useSelector((state: RootState)=> state.users.USERCreate);
     const [createUSER, setCreateUSER] = useState<USERCreateInterface>({
         username: "",
         password: "",
         role: null,
-        emp_no: NaN,
-        added_by: curr_user,
+        emp_id: NaN,
+        emp_no: "",
+        added_by: curr_user?.emp_no,
         is_temp: true
     });
 
     const onClickSubmit = (e: any) => {
         e.preventDefault();
         
-        if(createUSER.username && createUSER.password && createUSER.role && createUSER.emp_no) {
+        if(createUSER.username && createUSER.password && createUSER.role && createUSER.emp_id) {
 
             dispatch(USERCreateAction(createUSER))
 
@@ -50,7 +51,7 @@ function ManageUSERCreate(props: CreateUSERModalInterface) {
 
             const error:any = {}
 
-            !createUSER.emp_no && (error["Employee Number"] = "Employee Number is required!")
+            !createUSER.emp_id && (error.Employee = "Employee is required!")
             !createUSER.username && (error.Username = "Username is required!")
             !createUSER.password && (error.Password = "Password is required!")
             !createUSER.role && (error.Role = "Role is required!")
@@ -65,7 +66,7 @@ function ManageUSERCreate(props: CreateUSERModalInterface) {
                 return (
                     {
                         ...prevState,
-                        added_by: curr_user
+                        added_by: curr_user?.emp_no
                     }
                 )
             })
@@ -92,11 +93,11 @@ function ManageUSERCreate(props: CreateUSERModalInterface) {
     const sendEmail = async () => {
 
         const body = {
-          emp_no: createUSER.emp_no,
-          email_type: "reset",
-          new_password: createUSER.password,
-          application_type: null,
-          application_pk: null
+            emp_no: createUSER.emp_no,
+            email_type: "reset",
+            new_password: createUSER.password,
+            application_type: null,
+            application_pk: null
         }
     
         await axiosInstance.post(`reset_password_email/`, body).then((res:AxiosResponse) => {
@@ -117,6 +118,7 @@ function ManageUSERCreate(props: CreateUSERModalInterface) {
                 (
                     {
                         ...prevState,
+                        emp_id: newValue.id,
                         emp_no: newValue.emp_no
                     }
                 )
@@ -135,7 +137,7 @@ function ManageUSERCreate(props: CreateUSERModalInterface) {
                         <EmployeeListField 
                             label='HRIS Access For:'
                             handleChange={handleChangeEmpField} 
-                            currentValue={createUSER.emp_no} 
+                            currentValue={createUSER.emp_id} 
                         />
                     </div>
                     <div className='flex flex-col gap-3'>

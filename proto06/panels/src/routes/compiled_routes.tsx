@@ -20,8 +20,7 @@ import { IRoute } from "../types";
 const icon = { className: "w-5 h-5 text-inherit" };
 
 export const compiledRoutes = () => {
-  const state: any = useSelector((state: RootState) => state.auth.employee_detail);
-  
+  const state: any = useSelector((state: RootState) => state.auth);
   // Available sidenavroutes 
   let sideNavRoutes: any = [];
 

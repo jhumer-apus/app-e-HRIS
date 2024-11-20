@@ -1,8 +1,8 @@
-import { FormControl, InputLabel, OutlinedInput } from "@mui/material";
+import { FormControl, FormHelperText, InputLabel, OutlinedInput } from "@mui/material";
 import { Fragment } from "react";
 
 export default function InputField(props:any) {
-    const {field, ...restProps} = props
+    const {field, helperText, ...restProps} = props
     return (
         <Fragment>
             <FormControl 
@@ -18,6 +18,7 @@ export default function InputField(props:any) {
                     {...restProps}
                     {...field?? null}
                 />
+                <FormHelperText>{helperText?? ""}</FormHelperText>
             </FormControl>
         </Fragment>
     )

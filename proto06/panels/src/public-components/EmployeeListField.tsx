@@ -34,9 +34,9 @@ export default function EmployeeListField(props:Props) {
 
     let filterValue = null
     if(Array.isArray(currentValue)) {
-        filterValue = data?.filter((employee:any) => currentValue.includes(employee.emp_no)) ?? []
+        filterValue = data?.filter((employee:any) => currentValue.includes(employee.id as never)) ?? []
     } else {
-        filterValue = data?.find((employee:any) => employee.emp_no == currentValue) ?? null
+        filterValue = data?.find((employee:any) => employee.id == currentValue) ?? null
     }
     // console.log(filterValue)
 

@@ -77,34 +77,41 @@ export default function EditViolationType(props: Props) {
                             onSubmit={handleSubmit}        // Submit function
                             enableReinitialize={true} 
                         >
-                        <Form className="flex flex-col gap-4">
-                            <div>
-                                <Field
-                                    id="name"
-                                    name="name"  // 'name' corresponds to the key in initialValues
-                                    label="Name"
-                                    className="w-full"
-                                    component={InputField}  // Use the custom InputField component
-                                />
-                                <ErrorMessage name="name" component="div" className="text-red-500" />
-                            </div>
-                            <div>
-                                <Field
-                                    id="description"
-                                    name="description"  // 'name' corresponds to the key in initialValues
-                                    label="Description"
-                                    className="w-full"
-                                    component={InputField}  // Use the custom InputField component
-                                />
-                                <ErrorMessage name="description" component="div" className="text-red-500" />
-                            </div>
-                            <br></br>
-                            <div className="flex gap-4 m-auto">
-                                <Button variant="outlined" onClick={handleClose} className="w-full">CANCEL</Button>
-                                <Button variant="contained" type="submit" className="w-full">EDIT</Button>
-                            </div>
-                        </Form>
-                    </Formik> 
+                            {({ values }) => (
+                                <Form className="flex flex-col gap-4">
+                                    <div>
+                                        <Field
+                                            id="name"
+                                            name="name"  // 'name' corresponds to the key in initialValues
+                                            label="Name"
+                                            className="w-full"
+                                            component={InputField}  // Use the custom InputField component
+                                        />
+                                        <ErrorMessage name="name" component="div" className="text-red-500" />
+                                    </div>
+                                    <div>
+                                        <Field
+                                            id="description"
+                                            name="description"  // 'name' corresponds to the key in initialValues
+                                            label="Description"
+                                            className="w-full"
+                                            inputProps={{
+                                                maxLength:100
+                                            }}
+                                            helperText={`${values.description.length}/100`}
+                                            component={InputField}  // Use the custom InputField component
+                                        />
+                                        <ErrorMessage name="description" component="div" className="text-red-500" />
+                                    </div>
+                                    <br></br>
+                                    <div className="flex gap-4 m-auto">
+                                        <Button variant="outlined" onClick={handleClose} className="w-full">CANCEL</Button>
+                                        <Button variant="contained" type="submit" className="w-full">EDIT</Button>
+                                    </div>
+                                </Form>
+                            )}
+                        
+                        </Formik> 
                 }
             </Box>
         </Modal>

@@ -712,7 +712,8 @@ export interface RANKEditInterface extends RANKGenericInterface, RANKCreateInter
 export interface USERGenericInterface {
     username: string
     role: Internal_User_Role
-    emp_no: number
+    emp_id: number
+    emp_no: number | string
     added_by?: number
 }
 

@@ -41,7 +41,7 @@ const RouterWrapper = () => {
   };
 
   return (
-    <div style={{margin: '1rem'}}data-name="list">
+    <div data-name="list">
       {routes.map(({ layout, title, pages }, index) => {
         if (layout === "auth") return null;
         return (
